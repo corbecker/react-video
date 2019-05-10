@@ -1,8 +1,9 @@
+
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search-bar';
-const API_KEY = 'AIzaSyCyjPMtqWKywAL9ZIbkiiMlZD_Uxucj67c';
+import VideoList from './components/video-list';
 
 // Create a new component and this componenet should produce some html.
 class App extends Component {
@@ -11,7 +12,7 @@ class App extends Component {
     super(props);
     this.state = { videos: [] };
 
-    YTSearch({key: API_KEY, term: 'surfing'}, (videos) => {
+    YTSearch({key: process.env.API_KEY, term: 'surfing'}, (videos) => {
       this.setState({ videos })
     });
   }
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <div>
         <SearchBar />
+        <VideoList videos={this.state.videos}/>
       </div>
     );
   }
